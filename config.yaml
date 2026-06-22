@@ -1,0 +1,39 @@
+﻿# ============================================================
+# Augmented LLM 配置文件 (Chat + MCP + RAG)
+# ============================================================
+# 使用方法: 复制为 config.yaml 并填入你的 API Key
+
+# --- DeepSeek LLM 配置 ---
+llm:
+  api_key: "YOUR_DEEPSEEK_API_KEY"   # 或设环境变量 DEEPSEEK_API_KEY
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  max_tokens: 4096
+  temperature: 0.7
+
+# --- MCP Servers 配置 ---
+mcp_servers:
+  - name: "file"
+    command: ".venv/Scripts/python.exe"
+    args: ["mcp_servers/file_tools.py"]
+    env: {}
+
+  - name: "web"
+    command: ".venv/Scripts/python.exe"
+    args: ["mcp_servers/web_tools.py"]
+    env: {}
+
+# --- Embedding / RAG 配置 ---
+# 留空 api_key 即禁用 RAG；填入 SiliconFlow Key 即可启用
+embedding:
+  api_key: "YOUR_SILICONFLOW_API_KEY"   # 或设环境变量 SILICONFLOW_API_KEY
+  base_url: "https://api.siliconflow.cn/v1"
+  model: "BAAI/bge-m3"
+  data_url: ""                          # 数据源 URL（JSON 数组），用 /RAG <url> 动态加载
+  top_k: 3            # RAG 检索返回的最大条数
+
+# --- 系统参数 ---
+system:
+  max_tool_rounds: 10     # 最大工具调用轮数（防止死循环）
+  log_level: "INFO"       # DEBUG | INFO | WARNING
+  memory_file: "chat_memory.json"  # 长期记忆文件（关闭终端后保留）

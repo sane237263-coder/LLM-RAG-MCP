@@ -1,0 +1,23 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 虚拟环境
+.venv/
+
+# 长期记忆（用户隐私）
+chat_memory.json
+
+# 环境变量文件（API Key 存这里，不要提交）
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+# 网页摘要输出
+abstract/
